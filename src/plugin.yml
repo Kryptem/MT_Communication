@@ -1,4 +1,4 @@
-main: mortuusterra.Main
+main: mortuusterra.MortuusTerraChat
 name: MortuusTerraChat
 version: 1.0
 author: kadeska233
