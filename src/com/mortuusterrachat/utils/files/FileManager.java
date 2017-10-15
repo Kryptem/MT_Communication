@@ -79,10 +79,12 @@ public class FileManager {
 
   public void saveFiles() {
     main.getPlayerManager().savePlayersToDisk();
+    main.getTextMessageManager().saveMessagessToDisk();
   }
 
   public void loadFiles() {
     main.getPlayerManager().loadPlayersFromDisk();
+    main.getTextMessageManager().loadMessagesFromDisk();
     
   }
 

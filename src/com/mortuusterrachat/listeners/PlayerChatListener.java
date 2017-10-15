@@ -1,5 +1,6 @@
 package com.mortuusterrachat.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +15,14 @@ public class PlayerChatListener implements Listener {
 
   @EventHandler
   private void onChatEvent(AsyncPlayerChatEvent e) {
-    e.setCancelled(true);
+	  // Watch is the temporary cell phone
+	  if (e.getPlayer().getInventory().getItemInMainHand().getType() == Material.WATCH)
+		  return;
+	  // Walkie Talkie
+	  if (e.getPlayer().getInventory().getItemInMainHand().getType() == Material.REDSTONE_COMPARATOR)
+		  return;
+	  
+	  e.setCancelled(true);
 
     String message = e.getMessage();
     Player sender = e.getPlayer();
@@ -22,6 +30,7 @@ public class PlayerChatListener implements Listener {
     String format = ("&b" + sender.getName() + "&8&l >> &r");
 
     for (Player recipient : e.getRecipients()) {
+    	
       // Check if players are in the same world.
       if (!sender.getWorld().equals(recipient.getWorld()))
         continue;

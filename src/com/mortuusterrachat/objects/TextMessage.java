@@ -13,6 +13,10 @@ public class TextMessage {
     this.message = message;
     this.read = false;
   }
+  
+  public String getConfigFormat() {
+	  return sender + "-" + recipient + "-" + message;
+  }
 
   public String getSender() {
     return sender;

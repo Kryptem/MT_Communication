@@ -23,11 +23,11 @@ public class CellularPhoneListener implements Listener {
     this.main = main;
   }
   
-  // Cell phone item is rotten flesh for now.
+  // Cell phone item is a clock for now.
   
   @EventHandler
   public void onPlayerSpeak(AsyncPlayerChatEvent e) {
-    if (e.getPlayer().getInventory().getItemInMainHand().getType() != Material.ROTTEN_FLESH)
+    if (e.getPlayer().getInventory().getItemInMainHand().getType() != Material.WATCH)
       return;
     
     e.setCancelled(true);
@@ -38,7 +38,7 @@ public class CellularPhoneListener implements Listener {
   public void onCellPhoneInteract(PlayerInteractEvent e) {
     Player p = e.getPlayer();
     
-    if (p.getInventory().getItemInMainHand().getType() != Material.ROTTEN_FLESH)
+    if (p.getInventory().getItemInMainHand().getType() != Material.WATCH)
       return;
     
     e.setCancelled(true);
@@ -76,7 +76,7 @@ public class CellularPhoneListener implements Listener {
       return;
     
     if (pObject.getContacts().size() == 0) {
-      p.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + color("&7You have no contacts. Add some with [...]"));
+      p.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + color("&7You have no contacts. Add some with &e/mtr add contact <name>"));
       return;
     }
     
@@ -93,10 +93,10 @@ public class CellularPhoneListener implements Listener {
       p.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + color("&7Contact is not online. Message sent as text."));
     
     } else {
-      recipient.playSound(recipient.getLocation(), Sound.BLOCK_NOTE_CHIME, 5, 1);
+    	if (main.getPlayerManager().getPlayer(recipient).receiveNotificationSound())
+    		recipient.playSound(recipient.getLocation(), Sound.BLOCK_NOTE_CHIME, 5, 1);
+     
       recipient.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + color("&8&l[&e" + p.getName() + "&8&l] &7" + message));
-      
-      p.playSound(p.getLocation(), Sound.BLOCK_NOTE_CHIME, 5, 1);
       p.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + color("&7Called &e" + pObject.getCurrentCellPhoneRecipient() + "&7: " + message));
     }
     

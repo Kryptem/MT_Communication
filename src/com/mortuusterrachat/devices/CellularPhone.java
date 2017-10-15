@@ -25,7 +25,7 @@ public class CellularPhone {
     int contactIndex = 0;
 
     if (pObject.getContacts().size() == 0) {
-      p.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + StringUtilities.color("&7You have no contacts..."));
+      p.sendMessage(MortuusTerraChat.CELLPHONE_PREFIX + StringUtilities.color("&7You have no contacts. Add some with &e/mtr add contact <name>"));
       return;
 
     } else {
