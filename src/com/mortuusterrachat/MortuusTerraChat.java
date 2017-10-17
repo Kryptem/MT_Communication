@@ -1,5 +1,6 @@
 package com.mortuusterrachat;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +19,7 @@ import com.mortuusterrachat.utils.files.FileManager;
 
 public class MortuusTerraChat extends JavaPlugin {
 
-	private MortuusTerraCore core;
+	private static MortuusTerraCore core;
 
 	public static final String MTC_PREFIX = StringUtilities.color("&7&l[&b&lMTChat&7&l] ");
 	public static final String CELLPHONE_PREFIX = StringUtilities.color("&7&l[&b&l&6Cellular Phone&7&l] ");
@@ -31,6 +32,10 @@ public class MortuusTerraChat extends JavaPlugin {
 	private FrequencyManager frequencyManager;
 
 	public void onEnable() {
+		// Console sender
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "|----------|");
+		getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Starting Mortuus Terra chat.");
+
 		core = JavaPlugin.getPlugin(MortuusTerraCore.class);
 
 		frequencyManager = new FrequencyManager();
@@ -43,10 +48,23 @@ public class MortuusTerraChat extends JavaPlugin {
 
 		registerCommands();
 		registerListeners();
+		
+		// Console sender
+		getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Mortuus Terra chat ready.");
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "|----------|");
 	}
 
 	public void onDisable() {
+		// Console sender
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "|----------|");
+		getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Stoping Mortuus Terra chat.");
+
+		//save files
 		getFileManager().saveFiles();
+
+		// Console sender
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "|----------|");
+		getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Mortuus Terra chat stopped.");
 	}
 
 	public void registerListeners() {
