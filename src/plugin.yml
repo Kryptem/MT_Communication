@@ -17,3 +17,8 @@ commands:
   mtr:
     usage: /mtr
     description: Currently command for cellphones.
+
+permissions:
+  mtcom.unscrambled:
+    description: Send an unscrambled message to everyone online.
+    default: op
