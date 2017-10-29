@@ -16,6 +16,7 @@ import com.mortuusterrachat.MortuusTerraChat;
 import com.mortuusterrachat.utils.StringUtilities;
 
 public class PlayerChatListener implements Listener {
+	
   private MortuusTerraChat main = JavaPlugin.getPlugin(MortuusTerraChat.class);
 
   @EventHandler
@@ -31,7 +32,6 @@ public class PlayerChatListener implements Listener {
 
     String message = e.getMessage();
     Player sender = e.getPlayer();
-    
     String format = ("&b" + sender.getName() + "&8&l >> &r");
 
     for (Player recipient : e.getRecipients()) {
@@ -45,8 +45,14 @@ public class PlayerChatListener implements Listener {
         recipient.sendMessage(StringUtilities.color(format + message));
         continue;
       }
-      String scrambled = main.getMessageScrambler().scramble(message, sender, recipient);
       
+      // If message sent by admin/op don#t scramble
+      if (sender.hasPermission("mtcom.unscrambled")) {
+    	  recipient.sendMessage(StringUtilities.color(format + message));
+          continue;
+      }
+      
+      String scrambled = main.getMessageScrambler().scramble(message, sender, recipient);
       // 'Scrambled' will be null if the distance is > 100 (send no message to recipient).
       if (scrambled == null)
         continue;
