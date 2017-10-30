@@ -17,6 +17,8 @@ import com.mortuusterrachat.utils.StringUtilities;
 public class MortuusTerraChatCommands implements CommandExecutor {
 
 	private MortuusTerraChat main;
+	private final String[] helpPage = StringUtilities.helpPage("mtr", "clear contact", "Clears all contacts.",
+			"add contact <name>", "Adds a contact.", "del contact <name>", "Deletes a contact.");
 
 	public MortuusTerraChatCommands(MortuusTerraChat main) {
 		this.main = main;
@@ -37,9 +39,11 @@ public class MortuusTerraChatCommands implements CommandExecutor {
 			 */
 
 			Player p = (Player) sender;
-			if (args.length == 0)
+			if (args.length == 0) {
+				p.sendMessage(helpPage);
 				return true;
-
+			}
+			
 			if (args[1].equalsIgnoreCase("contact")) {
 				if (args.length == 3) {
 
@@ -66,19 +70,21 @@ public class MortuusTerraChatCommands implements CommandExecutor {
 					}
 				}
 			}
-			
+
 			if (args[0].equalsIgnoreCase("toggle")) {
 				if (args.length == 2) {
-					
+
 					if (args[1].equalsIgnoreCase("sound")) {
 						PlayerObject pObject = main.getPlayerManager().getPlayer(p);
-						
+
 						if (pObject.receiveNotificationSound()) {
 							pObject.setReceiveNotificationSound(false);
-							p.sendMessage(MortuusTerraChat.MTC_PREFIX + StringUtilities.color("&7Notification sound turned off."));
+							p.sendMessage(MortuusTerraChat.MTC_PREFIX
+									+ StringUtilities.color("&7Notification sound turned off."));
 						} else {
 							pObject.setReceiveNotificationSound(true);
-							p.sendMessage(MortuusTerraChat.MTC_PREFIX + StringUtilities.color("&7Notification sound turned on."));
+							p.sendMessage(MortuusTerraChat.MTC_PREFIX
+									+ StringUtilities.color("&7Notification sound turned on."));
 						}
 					}
 				}
